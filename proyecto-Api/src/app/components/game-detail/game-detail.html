@@ -1,0 +1,58 @@
+<div class="game-detail-container">
+  <div class="game-card">
+    <!-- Hero Section with Image -->
+    <div class="game-hero">
+      <img class="game-cover" [src]="game.imageUrl" [alt]="game.title" />
+      <div class="hero-gradient"></div>
+      
+      <div class="game-header">
+        <div class="header-content">
+          <h1 class="game-title">{{ game.title }}</h1>
+          
+          <div class="game-meta">
+            <span class="meta-badge">{{ game.releaseYear }}</span>
+ 
+          </div>
+          
+          <div class="genre-wrapper">
+            <span class="genre-tag">{{ game.genres.join(' · ') }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Content Sections -->
+    <div class="game-content">
+      <!-- Description Panel -->
+      <div class="info-panel">
+        <div class="panel-header">
+          <span class="panel-icon">📖</span>
+          <h3 class="panel-title">Descripción</h3>
+        </div>
+        <p class="panel-description">{{ game.description }}</p>
+        
+        <!-- Edit Button -->
+        <div class="action-wrapper">
+          <button 
+            class="edit-button"
+            (click)="goToEdit(game.id)">
+            <span class="button-icon">✎</span>
+            <span class="button-text">Editar juego</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Comment Panel -->
+      <div class="info-panel comment-panel">
+        <div class="panel-header">
+          <span class="panel-icon">💬</span>
+          <h3 class="panel-title">Comentario</h3>
+        </div>
+        <div class="comment-box">
+          <p class="comment-text">“{{ game.comment }}”</p>
+          <div class="comment-decoration"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

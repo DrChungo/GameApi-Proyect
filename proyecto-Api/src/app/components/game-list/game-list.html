@@ -1,0 +1,57 @@
+<div class="games-section">
+  <div class="section-header">
+    <h2 class="games-title">
+      <span class="title-icon">🎮</span>
+      <span class="title-text">Colección de Juegos</span>
+    </h2>
+    <div class="title-decoration"></div>
+  </div>
+
+  <div class="games-grid">
+    @for (game of gamesService.games; track game.id) {
+      <div class="game-card" (click)="goToDetail(game.id)">
+        
+        <!-- Image Container -->
+        <div class="card-image-wrapper">
+          <img 
+            class="card-image" 
+            [src]="game.imageUrl" 
+            [alt]="game.title" 
+          />
+          <div class="image-overlay"></div>
+          <div class="year-badge">{{ game.releaseYear }}</div>
+        </div>
+
+        <!-- Card Content -->
+        <div class="card-content">
+          <h3 class="card-title">{{ game.title }}</h3>
+
+          <div class="genres-wrapper">
+            @for (genre of game.genres; track genre) {
+              <span class="genre-chip">{{ genre }}</span>
+            }
+          </div>
+
+          <div class="comment-wrapper">
+            <span class="quote-icon">"</span>
+            <p class="card-comment">{{ game.comment }}</p>
+            <span class="quote-icon closing">"</span>
+          </div>
+
+          <!-- Action Button -->
+          <div class="card-actions">
+            <button 
+              class="delete-button"
+              (click)="delete(game.id); $event.stopPropagation()">
+              <span class="button-icon">🗑️</span>
+              <span class="button-text">Eliminar</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card Glow Effect -->
+        <div class="card-glow"></div>
+      </div>
+    }
+  </div>
+</div>

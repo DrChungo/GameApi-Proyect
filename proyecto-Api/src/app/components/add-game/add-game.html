@@ -1,0 +1,167 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <div class="header-icon">🎮</div>
+      <h2 class="form-title">Añadir nuevo juego</h2>
+      <p class="form-subtitle">Completa los detalles del juego</p>
+    </div>
+
+    <form (ngSubmit)="submit()" #gameForm="ngForm" class="elegant-form">
+      
+      <!-- Título -->
+      <div class="form-group">
+        <label class="field-label">
+          <span class="label-icon">📌</span>
+          <span class="label-text">Título del juego</span>
+        </label>
+        <div class="input-wrapper">
+          <input 
+            [(ngModel)]="game.title" 
+            name="title" 
+            #title="ngModel"
+            placeholder="ej. The Legend of Zelda" 
+            required
+            class="form-input"
+            [class.input-error]="title.invalid && title.touched"
+          />
+          <div class="input-highlight"></div>
+        </div>
+        @if (title.invalid && title.touched) {
+          <div class="error-message">
+            <span class="error-icon">⚠️</span>
+            <span>El título es obligatorio</span>
+          </div>
+        }
+      </div>
+
+      <!-- Año -->
+      <div class="form-group">
+        <label class="field-label">
+          <span class="label-icon">📅</span>
+          <span class="label-text">Año de lanzamiento</span>
+        </label>
+        <div class="input-wrapper">
+          <input
+            type="number"
+            [(ngModel)]="game.releaseYear"
+            name="releaseYear"
+            #year="ngModel"
+            required
+            min="1900"
+            max="2100"
+            placeholder="2024"
+            class="form-input"
+            [class.input-error]="year.invalid && year.touched"
+          />
+          <div class="input-highlight"></div>
+        </div>
+        @if (year.invalid && year.touched) {
+          <div class="error-message">
+            <span class="error-icon">⚠️</span>
+            <span>Año incorrecto (1900-2100)</span>
+          </div>
+        }
+      </div>
+
+      <!-- Géneros -->
+      <div class="form-group">
+        <label class="field-label">
+          <span class="label-icon">🏷️</span>
+          <span class="label-text">Géneros</span>
+        </label>
+        <div class="input-wrapper">
+          <input 
+            [(ngModel)]="game.genresText" 
+            name="genres" 
+            #genres="ngModel"
+            placeholder="RPG, Action, Adventure..." 
+            required
+            class="form-input"
+            [class.input-error]="genres.invalid && genres.touched"
+          />
+          <div class="input-highlight"></div>
+        </div>
+        <div class="field-hint">Separa los géneros con comas</div>
+        @if (genres.invalid && genres.touched) {
+          <div class="error-message">
+            <span class="error-icon">⚠️</span>
+            <span>Los géneros son obligatorios</span>
+          </div>
+        }
+      </div>
+
+      <!-- Comentario -->
+      <div class="form-group">
+        <label class="field-label">
+          <span class="label-icon">💬</span>
+          <span class="label-text">Comentario</span>
+        </label>
+        <div class="input-wrapper">
+          <input 
+            [(ngModel)]="game.comment" 
+            name="comment" 
+            #comment="ngModel"
+            placeholder="ej. Un juego increíble..." 
+            required
+            class="form-input"
+            [class.input-error]="comment.invalid && comment.touched"
+          />
+          <div class="input-highlight"></div>
+        </div>
+        @if (comment.invalid && comment.touched) {
+          <div class="error-message">
+            <span class="error-icon">⚠️</span>
+            <span>El comentario es obligatorio</span>
+          </div>
+        }
+      </div>
+
+      <!-- URL de la imagen -->
+      <div class="form-group">
+        <label class="field-label">
+          <span class="label-icon">🖼️</span>
+          <span class="label-text">URL de la imagen</span>
+        </label>
+        <div class="input-wrapper">
+          <input 
+            [(ngModel)]="game.imageUrl" 
+            name="imageUrl" 
+            #imageUrl="ngModel"
+            placeholder="https://ejemplo.com/imagen.jpg" 
+            required
+            class="form-input"
+            [class.input-error]="imageUrl.invalid && imageUrl.touched"
+          />
+          <div class="input-highlight"></div>
+        </div>
+        @if (imageUrl.invalid && imageUrl.touched) {
+          <div class="error-message">
+            <span class="error-icon">⚠️</span>
+            <span>La URL de la imagen es obligatoria</span>
+          </div>
+        }
+      </div>
+
+      <!-- Acciones -->
+      <div class="form-actions">
+        <button 
+          type="submit" 
+          class="submit-btn"
+          [disabled]="year.invalid || gameForm.invalid"
+        >
+          <span class="btn-icon">✨</span>
+          <span class="btn-text">Añadir juego</span>
+        </button>
+        
+        <button 
+          type="button" 
+          class="cancel-btn"
+          (click)="reset()"
+        >
+          <span class="btn-icon">✕</span>
+          <span class="btn-text">Cancelar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,182 @@
+<div class="edit-container">
+    <div class="edit-card">
+      <!-- Header -->
+      <div class="edit-header">
+        <div class="header-decoration">
+          <span class="decoration-icon">✎</span>
+        </div>
+        <h2 class="edit-title">Editar juego</h2>
+        <p class="edit-subtitle">Modifica los detalles del juego</p>
+        <div class="header-gradient"></div>
+      </div>
+  
+      <!-- Form -->
+      <form (ngSubmit)="submit()" #editForm="ngForm" class="edit-form">
+        
+        <!-- Título -->
+        <div class="form-group">
+          <label class="field-label">
+            <span class="label-icon">🎮</span>
+            <span class="label-text">Título del juego</span>
+          </label>
+          <div class="input-container">
+            <input 
+              [(ngModel)]="game.title" 
+              name="title" 
+              #title="ngModel"
+              placeholder="ej. The Legend of Zelda: Breath of the Wild" 
+              required
+              class="form-input"
+              [class.input-error]="title.invalid && title.touched"
+            />
+            <div class="input-focus-ring"></div>
+          </div>
+          @if (title.invalid && title.touched) {
+            <div class="input-error-message">
+              <span class="error-icon">⚠️</span>
+              <span>El título es obligatorio</span>
+            </div>
+          }
+        </div>
+  
+        <!-- Año -->
+        <div class="form-group">
+          <label class="field-label">
+            <span class="label-icon">📅</span>
+            <span class="label-text">Año de lanzamiento</span>
+          </label>
+          <div class="input-container">
+            <input 
+              [(ngModel)]="game.releaseYear" 
+              name="releaseYear" 
+              #year="ngModel"
+              placeholder="2024" 
+              required
+              type="number"
+              min="1900"
+              max="2100"
+              class="form-input"
+              [class.input-error]="year.invalid && year.touched"
+            />
+            <div class="input-focus-ring"></div>
+          </div>
+          @if (year.invalid && year.touched) {
+            <div class="input-error-message">
+              <span class="error-icon">⚠️</span>
+              <span>Año incorrecto (1900-2100)</span>
+            </div>
+          }
+        </div>
+  
+        <!-- Géneros -->
+        <div class="form-group">
+          <label class="field-label">
+            <span class="label-icon">🏷️</span>
+            <span class="label-text">Géneros</span>
+          </label>
+          <div class="input-container">
+            <input 
+              [(ngModel)]="game.genresText" 
+              name="genres" 
+              #genres="ngModel"
+              placeholder="RPG, Action, Adventure..." 
+              required
+              class="form-input"
+              [class.input-error]="genres.invalid && genres.touched"
+            />
+            <div class="input-focus-ring"></div>
+          </div>
+          <div class="input-hint">Separa los géneros con comas</div>
+          @if (genres.invalid && genres.touched) {
+            <div class="input-error-message">
+              <span class="error-icon">⚠️</span>
+              <span>Los géneros son obligatorios</span>
+            </div>
+          }
+        </div>
+  
+        <!-- Comentario -->
+        <div class="form-group">
+          <label class="field-label">
+            <span class="label-icon">💬</span>
+            <span class="label-text">Comentario</span>
+          </label>
+          <div class="input-container">
+            <input 
+              [(ngModel)]="game.comment" 
+              name="comment" 
+              #comment="ngModel"
+              placeholder="ej. Una obra maestra..." 
+              required
+              class="form-input"
+              [class.input-error]="comment.invalid && comment.touched"
+            />
+            <div class="input-focus-ring"></div>
+          </div>
+          @if (comment.invalid && comment.touched) {
+            <div class="input-error-message">
+              <span class="error-icon">⚠️</span>
+              <span>El comentario es obligatorio</span>
+            </div>
+          }
+        </div>
+  
+        <!-- URL de la imagen -->
+        <div class="form-group">
+          <label class="field-label">
+            <span class="label-icon">🖼️</span>
+            <span class="label-text">URL de la imagen</span>
+          </label>
+          <div class="input-container">
+            <input 
+              [(ngModel)]="game.imageUrl" 
+              name="imageUrl" 
+              #imageUrl="ngModel"
+              placeholder="https://ejemplo.com/imagen.jpg" 
+              required
+              class="form-input"
+              [class.input-error]="imageUrl.invalid && imageUrl.touched"
+            />
+            <div class="input-focus-ring"></div>
+          </div>
+          @if (imageUrl.invalid && imageUrl.touched) {
+            <div class="input-error-message">
+              <span class="error-icon">⚠️</span>
+              <span>La URL de la imagen es obligatoria</span>
+            </div>
+          }
+        </div>
+  
+        <!-- Preview de la imagen (opcional) -->
+        @if (game.imageUrl) {
+          <div class="image-preview">
+            <p class="preview-label">Vista previa:</p>
+            <div class="preview-wrapper">
+              <img [src]="game.imageUrl" alt="Preview" class="preview-image" />
+            </div>
+          </div>
+        }
+  
+        <!-- Acciones -->
+        <div class="form-actions">
+          <button 
+            type="submit" 
+            class="save-button"
+            [disabled]="editForm.invalid"
+          >
+            <span class="button-icon">💾</span>
+            <span class="button-text">Guardar cambios</span>
+          </button>
+          
+          <button 
+            type="button" 
+            class="cancel-button"
+            (click)="reset()"
+          >
+            <span class="button-icon">✕</span>
+            <span class="button-text">Cancelar</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
