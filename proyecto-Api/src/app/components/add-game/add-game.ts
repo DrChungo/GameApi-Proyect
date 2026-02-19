@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
   templateUrl: './add-game.html',
   styleUrl: './add-game.css',
 })
+
+//clase para agregar un juego
 export class AddGame {
 
   game = {
@@ -21,9 +23,10 @@ export class AddGame {
     imageUrl: '',
     description: ''
   };
-
+//constructor para agregar un juego
   constructor(private gameService: GamesService, private cdr: ChangeDetectorRef,private router: Router) { }
 
+//metodo para agregar un juego
   submit() {
     const genresArray = (this.game.genresText ?? '')
       .split(',')
@@ -50,10 +53,12 @@ export class AddGame {
     });
   }
 
+  //metodo para ir a la pagina principal
   goToMain() {
     this.router.navigate(['/']);
   }
 
+  //metodo para resetear el formulario
   reset() {
     this.game = {
       title: '',

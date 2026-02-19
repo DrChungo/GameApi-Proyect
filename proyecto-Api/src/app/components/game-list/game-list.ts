@@ -14,10 +14,12 @@ export class GameList {
   constructor(public gamesService: GamesService
     , private cdr: ChangeDetectorRef,
     private router: Router
-  ) { }
+  ) {}
+  //metodo para inicializar el componente
   ngOnInit(): void {
     this.getGames();
   }
+  //metodo para obtener los juegos
   getGames() {
     this.gamesService.getGames().subscribe({
       next: (data: any[]) => {
@@ -29,9 +31,11 @@ export class GameList {
       },
     });
   }
+  //metodo para ir a la pagina de detalle de un juego
   goToDetail(id: number) {
     this.router.navigate(['/game', id]);
   }
+  //metodo para eliminar un juego
   delete(id: number) {
     const ok = confirm('¿Eliminar juego?');
     if (!ok) return;

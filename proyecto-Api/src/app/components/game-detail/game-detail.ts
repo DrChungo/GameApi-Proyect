@@ -10,17 +10,21 @@ import { ActivatedRoute, Router  } from '@angular/router';
 })
 export class GameDetail {
   game: any = {};
-  constructor(public gamesService: GamesService
-    , private cdr: ChangeDetectorRef,
+  //constructor para obtener el juego por id
+  constructor(public gamesService: GamesService,
+     private cdr: ChangeDetectorRef,
     private router: ActivatedRoute,
     private r: Router
   ) { }
+  //metodo para inicializar el componente
   ngOnInit(): void {
     const id = this.router.snapshot.paramMap.get('id');
     if (!id) return;
 
     this.loadGame(id);
   }
+
+  //metodo para obtener el juego por id
   loadGame(id: string) {
 
     this.gamesService.getGameById(id).subscribe({

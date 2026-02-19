@@ -11,6 +11,8 @@ import { ChangeDetectorRef } from '@angular/core';
   templateUrl: './edit-game.html',
   styleUrl: './edit-game.css',
 })
+
+//clase para editar un juego
 export class EditGame {
   id = 0;
 
@@ -24,17 +26,19 @@ export class EditGame {
     description: ''
   };
 
+  //constructor para editar un juego
   constructor(private route: ActivatedRoute,
     private gameService: GamesService,
     private router: Router,
     private cdr: ChangeDetectorRef) { }
 
+  //metodo para inicializar el componente
   ngOnInit(): void {
     const idStr = this.route.snapshot.paramMap.get('id');
     if (!idStr) return;
 
     this.id = Number(idStr);
-
+    //metodo para obtener el juego por id
     this.gameService.getGameById(this.id).subscribe({
       next: (data) => {
         // rellenamos el form con lo que viene de la API
@@ -53,12 +57,14 @@ export class EditGame {
     });
   }
 
+  //metodo para enviar el formulario
   submit() {
     const genresArray = (this.game.genresText ?? '')
       .split(',')
       .map(g => g.trim())
       .filter(g => g.length > 0);
 
+    //Objeto que contiene los datos del formulario y los envia a la API para actualizar el juego
     const payload = {
       title: this.game.title,
       releaseYear: this.game.releaseYear,
@@ -68,6 +74,7 @@ export class EditGame {
       description: this.game.description
     };
 
+    //metodo para actualizar el juego
     this.gameService.updateGame(this.id, payload).subscribe({
       next: () => {
         // actualiza lista en memoria si existe
@@ -87,6 +94,7 @@ export class EditGame {
     });
   }
 
+  //metodo para resetear el formulario
   reset() {
     this.game = {
       title: '',
