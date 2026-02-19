@@ -107,4 +107,9 @@ export class EditGame {
     };
   }
 
+  //metodo para ir a la pagina principal
+  goToMain() {
+    this.router.navigate(['/']);
+  }
+
 }
